@@ -1,11 +1,12 @@
 .mainContainer{
     display:grid;
-    grid-template-columns: 30px 100px;
-    grid-template-rows: 100px 300px 300px 50px;
-    grid-template-areas :
-      "hd hd hd hd hd hd"
-      "sd sd mn mn mn mn"
-      "sd sd tt tt tt tt"
+    grid-template-columns: auto;
+    grid-template-rows: 50px 50px 200px 500px 50px;
+    grid-template-areas:
+      "nb nb nb nb nb nb"
+      "al al al al al al"
+      "am am am am am am"
+      "mn mn mn mn mn mn"
       "ft ft ft ft ft ft";
     border: 2px solid yellow;
 }
@@ -14,14 +15,31 @@
     border: 1px solid red;
 }
 #navBar{
-grid-area: hd;
+grid-area: nb;
 }
-#sideBar{
-grid-area: sd;
+#articleList{
+grid-area: al;
+}
+#articleMonth{
+grid-area: am;
 }
 #postsPreview{
 grid-area: mn;
 }
 #footer{
 grid-area: ft;
+}
+
+@media(min-width:700px){
+    .mainContainer{
+        display:grid;
+        grid-template-columns: 30px 100px;
+        grid-template-rows: 100px 300px 300px 50px;
+        grid-template-areas:
+        "nb nb nb nb nb nb"
+        "al al am am am am"
+        "al al mn mn mn mn"
+        "ft ft ft ft ft ft";
+        border: 2px solid yellow;
+    }
 }
