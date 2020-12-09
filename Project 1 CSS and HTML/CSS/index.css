@@ -1,0 +1,27 @@
+.mainContainer{
+    display:grid;
+    grid-template-columns: 30px 100px;
+    grid-template-rows: 100px 300px 300px 50px;
+    grid-template-areas :
+      "hd hd hd hd hd hd"
+      "sd sd mn mn mn mn"
+      "sd sd tt tt tt tt"
+      "ft ft ft ft ft ft";
+    border: 2px solid yellow;
+}
+
+.box{
+    border: 1px solid red;
+}
+#navBar{
+grid-area: hd;
+}
+#sideBar{
+grid-area: sd;
+}
+#postsPreview{
+grid-area: mn;
+}
+#footer{
+grid-area: ft;
+}
