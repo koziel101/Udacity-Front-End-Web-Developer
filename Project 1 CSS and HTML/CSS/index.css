@@ -1,7 +1,7 @@
 .mainContainer{
     display:grid;
     grid-template-columns: auto;
-    grid-template-rows: 50px 50px 200px 500px 50px;
+    grid-template-rows: 50px auto 300px 500px 50px;
     grid-template-areas:
       "nb"
       "al"
@@ -74,6 +74,16 @@ ul {
 
 #articleMonth{
     grid-area: am;
+    background-image: url("images/articleOfTheMonthSmall.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#destinationWhite{
+    color: white;
 }
 
 #postsPreview{
@@ -81,7 +91,7 @@ ul {
 }
 
 #footer{
-grid-area: ft;
+    grid-area: ft;
 }
 
 /* Screen bigger than 700px (web) */
@@ -89,12 +99,19 @@ grid-area: ft;
     .mainContainer{
         display:grid;
         grid-template-columns: 50px 100px;
-        grid-template-rows: 50px 300px 600px 50px;  
+        grid-template-rows: 50px 400px 600px 50px;  
         grid-template-areas:
         "nb nb nb nb nb nb"
         "al al am am am am"
         "al al mn mn mn mn"
         "ft ft ft ft ft ft";
         border: 2px solid yellow;
+    }
+
+    #articleMonth{
+        grid-area: am;
+        background-image: url("images/articleOfTheMonthBig.jpg");
+        background-size: cover;
+        background-position: center;
     }
 }
