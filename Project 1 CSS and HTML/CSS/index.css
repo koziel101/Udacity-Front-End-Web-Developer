@@ -1,3 +1,4 @@
+/* Layout for small screens */
 .mainContainer{
     display:grid;
     grid-template-columns: auto;
@@ -15,14 +16,8 @@
     border: 1px solid red;
 }
 
-.navItem{
-    width: auto;
-    height: auto;
-    padding: 5px;
+.centerText{
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    color:white;
 }
 
 #navBar{
@@ -31,6 +26,17 @@
     flex-direction: row;
     justify-content: flex-start;
     background-color: rgb(53, 53, 53);
+}
+
+/* Decorations for the NavBar items */
+.navItem{
+    width: auto;
+    height: auto;
+    padding: 5px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    color:white;
 }
 
 .navItem:hover{
@@ -45,10 +51,7 @@
     border-radius: 25px;
 }
 
-.centerText{
-    text-align: center;
-}
-
+/* Decorations for the Archive list items */
 .listItem{
     text-decoration: none;
     color: black;
@@ -61,16 +64,17 @@
 
 ul {
     list-style: none;
-  }
-  
-  ul li::before {
+ }
+
+ /* Decorations for the Archive list items: symbol to be added before each month */
+ ul li:before {
     content: "\2020";
     color: red;
     font-weight: bold;
     display: inline-block; 
     width: 1em;
     margin-left: -1em;
-  }
+}
 
 #articleMonth{
     grid-area: am;
@@ -94,7 +98,7 @@ ul {
     grid-area: ft;
 }
 
-/* Screen bigger than 700px (web) */
+/* Settings for screens bigger than 700px (web) */
 @media(min-width:700px){
     .mainContainer{
         display:grid;
