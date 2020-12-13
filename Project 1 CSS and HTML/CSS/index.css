@@ -9,11 +9,6 @@
     "am"
     "mn"
     "ft";
-  border: 2px solid yellow;
-}
-
-.box {
-  border: 1px solid red;
 }
 
 .centerText {
@@ -101,28 +96,22 @@ ul li:before {
   grid-template-areas:
     "at1 at2"
     "at3 at4";
-  border: 2px solid green;
 }
 
 #article1 {
   grid-area: at1;
-
-  border: 2px solid yellow;
 }
 
 #article2 {
   grid-area: at2;
-  border: 2px solid blue;
 }
 
 #article3 {
   grid-area: at3;
-  border: 2px solid blueviolet;
 }
 
 #article4 {
   grid-area: at4;
-  border: 2px solid firebrick;
 }
 
 #footer {
@@ -140,7 +129,6 @@ ul li:before {
       "al al am am am am"
       "al al mn mn mn mn"
       "ft ft ft ft ft ft";
-    border: 2px solid yellow;
   }
 
   #articleMonth {
@@ -157,6 +145,5 @@ ul li:before {
     grid-template-areas:
       "at1 at2"
       "at3 at4";
-    border: 2px solid green;
   }
 }
