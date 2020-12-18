@@ -21,6 +21,7 @@
   flex-direction: row;
   justify-content: flex-start;
   background-color: rgb(53, 53, 53);
+  margin-bottom: 5px;
 }
 
 /* Decorations for the NavBar items */
@@ -80,7 +81,7 @@ ul li:before {
   flex-direction: column-reverse;
 }
 
-#destinationWhite {
+.whiteText {
   color: white;
 }
 
@@ -98,20 +99,40 @@ ul li:before {
     "at3 at4";
 }
 
+.articleDetails {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  text-shadow: 2px 1px black;
+  font-size: 20px;
+  margin: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.justifyText {
+  text-align: justify;
+}
+
 #article1 {
   grid-area: at1;
+  background-image: url("images/japanOriginalSize.jpg");
 }
 
 #article2 {
   grid-area: at2;
+  background-image: url("images/industryOriginalSize.jpg");
 }
 
 #article3 {
   grid-area: at3;
+  background-image: url("images/coronaOriginalSize.jpg");
 }
 
 #article4 {
   grid-area: at4;
+  background-image: url("images/bidenOriginalSize.jpg");
 }
 
 #footer {
