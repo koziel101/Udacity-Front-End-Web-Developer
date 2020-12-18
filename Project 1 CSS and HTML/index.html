@@ -10,9 +10,9 @@
 <body>
     <div class="mainContainer">
         <div id="navBar" class="box">
-            <a href="index.html" class="navItem">Home</a>
-            <a href="" class="navItem">Search</a>
-            <a href="monthlyArticle.html" class="navItem">Article of the Month</a>
+            <a href="index.html" class="navItem linkDecoration">Home</a>
+            <a href="" class="navItem linkDecoration">Search</a>
+            <a href="monthlyArticle.html linkDecoration" class="navItem linkDecoration">Article of the Month</a>
         </div>
         <div id="articleList">
             <h3 class="centerText">Archive:</h3>
@@ -32,12 +32,14 @@
                 <li><a href="" class="listItem">December</a></li>
             </ul>
         </div>
-        <div id="articleMonth" class="box">
-            <h3 class="whiteText">Check out the main touristic destinations for 2021</h3>
-            <h2 class="whiteText"><strong>Article of the Month: Touristic destinations for 2021!</strong></h2>
+        <div id="articleMonth">
+            <a href="monthlyArticle.html" class="linkDecoration">
+                <h3 class="whiteText">Check out the main touristic destinations for 2021</h3>
+                <h2 class="whiteText"><strong>Article of the Month: Touristic destinations for 2021!</strong></h2>
+            </a>
 
         </div>
-        <div id="postsPreview" class="box">
+        <div id="postsPreview">
             <!-- Nested CSS Grid -->
             <div id="nestedGrid">
                 <div id="article1" class="whiteText articleDetails">
@@ -71,7 +73,15 @@
             </div>
 
         </div>
-        <div id="footer" class="box">footer</div>
+        <div id="footer">
+            <p>Find me on: </p>
+            <a href="https://github.com/koziel101" class="footerItem">
+                <img src="images/github.jpg" alt="github" id="gitHubLogo">
+            </a>
+            <a href="https://linkedin.com/in/koziel101" class="footerItem">
+                <img src="images/logo-linkedin.jpg" alt="linkedin" id="linkedinLogo">
+            </a>
+        </div>
     </div>
 </body>
 
