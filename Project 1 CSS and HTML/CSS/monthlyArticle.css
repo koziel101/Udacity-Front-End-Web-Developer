@@ -2,17 +2,20 @@
 .mainContainer {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 50px auto 300px 420px 50px;
+  grid-template-rows: 50px 400px auto;
   grid-template-areas:
     "nb"
-    "al"
-    "am"
-    "mn"
+    "ti"
+    "mt"
     "ft";
 }
 
 .centerText {
   text-align: center;
+}
+
+.justifyText {
+  text-align: justify;
 }
 
 #navBar {
@@ -42,36 +45,16 @@
   text-decoration: none;
 }
 
-#articleList {
-  grid-area: al;
-  background-color: rgb(122, 122, 122);
-  margin: 10px;
-  border-radius: 25px;
+#titleImg {
+  grid-area: ti;
+  background-image: url("images/articleOfTheMonthBig.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-/* Decorations for the Archive list items */
-.listItem {
-  text-decoration: none;
-  color: black;
-}
-
-.listItem:hover {
-  color: rgb(35, 38, 211);
-  text-decoration: underline;
-}
-
-ul {
-  list-style: none;
-}
-
-/* Decorations for the Archive list items: symbol to be added before each month */
-ul li:before {
-  content: "\2020";
-  color: red;
-  font-weight: bold;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
+#mainText {
+  grid-area: mt;
 }
 
 #footer {
@@ -93,21 +76,4 @@ ul li:before {
 #linkedinLogo {
   width: 90px;
   height: auto;
-}
-
-@media (min-width: 700px) and (max-width: 1100px) {
-}
-
-/* Settings for screens bigger than 700px (web) */
-@media (min-width: 1101px) {
-  .mainContainer {
-    display: grid;
-    grid-template-columns: 50px 100px;
-    grid-template-rows: 50px 400px 600px 50px;
-    grid-template-areas:
-      "nb nb nb nb nb nb"
-      "al al am am am am"
-      "al al mn mn mn mn"
-      "ax ax ft ft ft ft";
-  }
 }
