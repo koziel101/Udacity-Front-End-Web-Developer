@@ -1,5 +1,5 @@
 /* Layout for small screens */
-.mainContainer {
+.main__container {
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 50px auto 300px 420px 50px;
@@ -11,11 +11,11 @@
     "ft";
 }
 
-.centerText {
+.center__text {
   text-align: center;
 }
 
-#navBar {
+#nav__bar {
   grid-area: nb;
   display: flex;
   flex-direction: row;
@@ -25,7 +25,7 @@
 }
 
 /* Decorations for the NavBar items */
-.navItem {
+.nav__item {
   width: auto;
   height: auto;
   padding: 5px;
@@ -34,15 +34,15 @@
   color: white;
 }
 
-.navItem:hover {
+.nav__item:hover {
   background-color: rgb(0, 0, 0);
 }
 
-.linkDecoration {
+.link__decoration {
   text-decoration: none;
 }
 
-#articleList {
+#article__list {
   grid-area: al;
   background-color: rgb(122, 122, 122);
   margin: 10px;
@@ -50,12 +50,12 @@
 }
 
 /* Decorations for the Archive list items */
-.listItem {
+.list__item {
   text-decoration: none;
   color: black;
 }
 
-.listItem:hover {
+.list__item:hover {
   color: rgb(35, 38, 211);
   text-decoration: underline;
 }
@@ -74,7 +74,7 @@ ul li:before {
   margin-left: -1em;
 }
 
-#articleMonth {
+#article__month {
   grid-area: am;
   background-image: url("images/articleOfTheMonthSmall.jpg");
   background-size: cover;
@@ -84,16 +84,16 @@ ul li:before {
   flex-direction: column-reverse;
 }
 
-.whiteText {
+.white__text {
   color: white;
 }
 
-#postsPreview {
+#posts__preview {
   grid-area: mn;
 }
 
 /* Nested Grid to display the 4 articles */
-#nestedGrid {
+#nested__grid {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 200px 200px;
@@ -102,7 +102,7 @@ ul li:before {
     "at3 at4";
 }
 
-.articleDetails {
+.article__details {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -114,7 +114,7 @@ ul li:before {
   padding-right: 15px;
 }
 
-.justifyText {
+.justify__text {
   text-align: justify;
 }
 
@@ -138,70 +138,37 @@ ul li:before {
   background-image: url("images/bidenOriginalSize.jpg");
 }
 
-#footer {
+footer {
   grid-area: ft;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.footerItem {
+footer p {
+  font-style: italic;
+}
+
+.footer__item {
   margin-left: 15px;
 }
 
-#gitHubLogo {
+#github__logo {
   width: 40px;
   height: auto;
 }
 
-#linkedinLogo {
+#linkedin__logo {
   width: 90px;
   height: auto;
 }
 
-@media (min-width: 700px) and (max-width: 1100px) {
-  .articleDetails {
-    font-size: 13px;
-  }
-
-  #articleMonth {
-    grid-area: am;
-    background-image: url("images/articleOfTheMonthBig.jpg");
-    background-size: cover;
-    background-position: center;
-  }
+#twitter__logo {
+  width: 80px;
+  height: auto;
 }
 
-/* Settings for screens bigger than 700px (web) */
-@media (min-width: 1101px) {
-  .mainContainer {
-    display: grid;
-    grid-template-columns: 50px 100px;
-    grid-template-rows: 50px 400px 600px 50px;
-    grid-template-areas:
-      "nb nb nb nb nb nb"
-      "al al am am am am"
-      "al al mn mn mn mn"
-      "ax ax ft ft ft ft";
-  }
-
-  #articleMonth {
-    grid-area: am;
-    background-image: url("images/articleOfTheMonthBig.jpg");
-    background-size: cover;
-    background-position: center;
-  }
-
-  #nestedGrid {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 290px 290px;
-    grid-template-areas:
-      "at1 at2"
-      "at3 at4";
-  }
-
-  .articleDetails {
-    font-size: 20px;
-  }
+#fb__logo {
+  width: 50px;
+  height: auto;
 }

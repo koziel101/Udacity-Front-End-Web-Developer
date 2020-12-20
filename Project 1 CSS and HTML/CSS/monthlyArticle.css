@@ -1,8 +1,8 @@
 /* Layout for small screens */
-.mainContainer {
+.main__container {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 50px 400px auto;
+  grid-template-rows: 50px auto auto;
   grid-template-areas:
     "nb"
     "ti"
@@ -10,15 +10,15 @@
     "ft";
 }
 
-.centerText {
+.center__text {
   text-align: center;
 }
 
-.justifyText {
+.justify__text {
   text-align: justify;
 }
 
-#navBar {
+#nav__bar {
   grid-area: nb;
   display: flex;
   flex-direction: row;
@@ -28,7 +28,7 @@
 }
 
 /* Decorations for the NavBar items */
-.navItem {
+.nav__item {
   width: auto;
   height: auto;
   padding: 5px;
@@ -37,43 +37,45 @@
   color: white;
 }
 
-.navItem:hover {
+.nav__item:hover {
   background-color: rgb(0, 0, 0);
 }
 
-.linkDecoration {
+.link__decoration {
   text-decoration: none;
 }
 
-#titleImg {
+#title__img {
   grid-area: ti;
-  background-image: url("images/articleOfTheMonthBig.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  max-width: 100%;
+  height: auto;
 }
 
-#mainText {
+#main__text {
   grid-area: mt;
 }
 
-#footer {
+footer {
   grid-area: ft;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.footerItem {
+footer p{
+  font-style: italic;
+}
+
+.footer__item {
   margin-left: 15px;
 }
 
-#gitHubLogo {
+#github__logo {
   width: 40px;
   height: auto;
 }
 
-#linkedinLogo {
+#linkedin__logo {
   width: 90px;
   height: auto;
 }

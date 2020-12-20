@@ -1,0 +1,33 @@
+/* Settings for screens bigger than 700px (web) */
+@media (min-width: 1101px) {
+  .main__container {
+    display: grid;
+    grid-template-columns: 50px 100px;
+    grid-template-rows: 50px 400px 600px 50px;
+    grid-template-areas:
+      "nb nb nb nb nb nb"
+      "al al am am am am"
+      "al al mn mn mn mn"
+      "ax ax ft ft ft ft";
+  }
+
+  #article__month {
+    grid-area: am;
+    background-image: url("images/articleOfTheMonthBig.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  #nested__grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 290px 290px;
+    grid-template-areas:
+      "at1 at2"
+      "at3 at4";
+  }
+
+  .article__details {
+    font-size: 20px;
+  }
+}
