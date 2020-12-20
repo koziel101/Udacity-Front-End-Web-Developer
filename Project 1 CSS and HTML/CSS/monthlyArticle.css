@@ -2,11 +2,12 @@
 .main__container {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 50px auto auto;
+  grid-template-rows: 50px auto;
   grid-template-areas:
     "nb"
     "ti"
     "mt"
+    "ab"
     "ft";
 }
 
@@ -55,6 +56,24 @@
   grid-area: mt;
 }
 
+#author__bio {
+  grid-area: ab;
+  background-color: rgb(238, 238, 238);
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+#bio__details {
+  display: flex;
+  flex-direction: row;
+}
+
+#avatar__image {
+  margin-right: 40px;
+  width: 100%;
+  height: auto;
+}
+
 footer {
   grid-area: ft;
   display: flex;
@@ -62,7 +81,7 @@ footer {
   align-items: center;
 }
 
-footer p{
+footer p {
   font-style: italic;
 }
 
@@ -78,4 +97,18 @@ footer p{
 #linkedin__logo {
   width: 90px;
   height: auto;
+}
+
+@media (min-width: 700px) and (max-width: 1100px) {
+  #avatar__image {
+    margin-right: 40px;
+  }
+}
+
+@media (min-width: 1101px) {
+  #avatar__image {
+    margin-right: 40px;
+    width: auto;
+    height: auto;
+  }
 }
