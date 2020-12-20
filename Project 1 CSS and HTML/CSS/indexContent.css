@@ -1,0 +1,64 @@
+
+#article__month {
+  grid-area: am;
+  background-image: url("images/articleOfTheMonthSmall.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.white__text {
+  color: white;
+}
+
+#posts__preview {
+  grid-area: mn;
+}
+
+/* Nested Grid to display the 4 articles */
+#nested__grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 200px 200px;
+  grid-template-areas:
+    "at1 at2"
+    "at3 at4";
+}
+
+.article__details {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  text-shadow: 2px 1px black;
+  font-size: 11px;
+  margin: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.justify__text {
+  text-align: justify;
+}
+
+#article1 {
+  grid-area: at1;
+  background-image: url("images/japanOriginalSize.jpg");
+}
+
+#article2 {
+  grid-area: at2;
+  background-image: url("images/industryOriginalSize.jpg");
+}
+
+#article3 {
+  grid-area: at3;
+  background-image: url("images/coronaOriginalSize.jpg");
+}
+
+#article4 {
+  grid-area: at4;
+  background-image: url("images/bidenOriginalSize.jpg");
+}
