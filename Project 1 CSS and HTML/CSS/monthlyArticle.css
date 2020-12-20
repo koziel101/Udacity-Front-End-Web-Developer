@@ -63,6 +63,10 @@
   margin-bottom: 10px;
 }
 
+#bio_intro{
+  text-align: center;
+}
+
 #bio__details {
   display: flex;
   flex-direction: row;
