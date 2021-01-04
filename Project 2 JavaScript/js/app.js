@@ -27,6 +27,15 @@ let navBar = document.getElementById("navbar__list");
  *
 */
 
+var isInViewport = function (elem) {
+    var bounding = elem.getBoundingClientRect();
+    return (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
 
 
 /**
@@ -48,9 +57,28 @@ for (section of sections) {
 }
 
 navBar.appendChild(div);
-console.log(navBar)
+console.log(navBar);
 
-    // Add class 'active' to section when near top of viewport
+// Add class 'active' to section when near top of viewport
+
+let section2 = document.getElementById("section2");
+
+let last_known_scroll_position = 0;
+let inViewport = false;
+document.addEventListener('scroll', function (e) {
+    last_known_scroll_position = isInViewport(section2);
+   
+        if (isInViewport(section2)) {
+            console.log('In the viewport!');
+            inViewport = true;
+        } else {
+            console.log('Not in the viewport... :(');
+
+            inViewport = false;
+        }
+});
+
+
 
 
     // Scroll to anchor ID using scrollTO event
