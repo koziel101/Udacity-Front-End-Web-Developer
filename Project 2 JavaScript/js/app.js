@@ -18,8 +18,8 @@
  *
 */
 
-let sections = document.querySelectorAll("section");
-let navBar = document.getElementById("navbar__list");
+const sections = document.querySelectorAll("section");
+const navBar = document.getElementById("navbar__list");
 
 /**
  * End Global Variables
@@ -27,7 +27,7 @@ let navBar = document.getElementById("navbar__list");
  *
 */
 
-var isInViewport = function (elem) {
+let isInViewport = function (elem) {
     var bounding = elem.getBoundingClientRect();
     return (
         bounding.top >= 0 &&
@@ -37,6 +37,22 @@ var isInViewport = function (elem) {
     );
 };
 
+let monitorSections = function (section) {
+    let last_known_scroll_position = 0;
+    let inViewport = false;
+
+    document.addEventListener('scroll', function (e) {
+        last_known_scroll_position = isInViewport(section);
+
+        if (isInViewport(section)) {
+            console.log(section.dataset.nav + " is in the viewport!");
+            inViewport = true;
+        } else {
+            console.log(section.dataset.nav + ' is not in the viewport... :(');
+            inViewport = false;
+        }
+    });
+}
 
 /**
  * End Helper Functions
@@ -46,7 +62,7 @@ var isInViewport = function (elem) {
 
 // build the nav
 
-let div = document.createElement("div");
+const div = document.createElement("div");
 
 for (section of sections) {
 
@@ -61,28 +77,11 @@ console.log(navBar);
 
 // Add class 'active' to section when near top of viewport
 
-let section2 = document.getElementById("section2");
+for (section of sections) {
+    monitorSections(section);
+}
 
-let last_known_scroll_position = 0;
-let inViewport = false;
-document.addEventListener('scroll', function (e) {
-    last_known_scroll_position = isInViewport(section2);
-   
-        if (isInViewport(section2)) {
-            console.log('In the viewport!');
-            inViewport = true;
-        } else {
-            console.log('Not in the viewport... :(');
-
-            inViewport = false;
-        }
-});
-
-
-
-
-    // Scroll to anchor ID using scrollTO event
-
+// Scroll to anchor ID using scrollTO event
 
 /**
  * End Main Functions
