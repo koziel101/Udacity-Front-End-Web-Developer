@@ -8,6 +8,21 @@
  *
 */
 
+/* Adding class for new NavBarItems */
+.navBarItemJS{
+  color: black;
+  padding: 10px;
+  font-family: "Merriweather", serif;
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.navBarItemJS:hover {
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+  background-color: rgb(77, 77, 77);
+}
+
 /* ---- Base Rules ---- */
 body {
   background: rgb(136, 203, 171);

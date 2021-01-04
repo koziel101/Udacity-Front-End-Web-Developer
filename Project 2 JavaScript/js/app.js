@@ -18,6 +18,8 @@
  *
 */
 
+let sections = document.querySelectorAll("section");
+let navBar = document.getElementById("navbar__list");
 
 /**
  * End Global Variables
@@ -35,11 +37,23 @@
 
 // build the nav
 
+let div = document.createElement("div");
 
-// Add class 'active' to section when near top of viewport
+for (section of sections) {
+
+    let newSectionNavBar = document.createElement("li");
+    newSectionNavBar.textContent = (section.dataset.nav);
+    newSectionNavBar.className = "navBarItemJS";
+    div.appendChild(newSectionNavBar);
+}
+
+navBar.appendChild(div);
+console.log(navBar)
+
+    // Add class 'active' to section when near top of viewport
 
 
-// Scroll to anchor ID using scrollTO event
+    // Scroll to anchor ID using scrollTO event
 
 
 /**
@@ -48,10 +62,8 @@
  *
 */
 
-// Build menu 
+    // Build menu 
 
-// Scroll to section on link click
+    // Scroll to section on link click
 
-// Set sections as active
-
-
+    // Set sections as active
