@@ -9,7 +9,7 @@
 */
 
 /* Adding class for new NavBarItems */
-.navBarItemJS{
+.navBarItemJS {
   color: black;
   padding: 10px;
   font-family: "Merriweather", serif;
@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-.active__state{
+.active__state {
   background-color: #cc1;
 }
 
@@ -249,5 +249,20 @@ section.active .landing__container::after {
   }
   to {
     transform: rotate(360deg) translate(-1em) rotate(-360deg);
+  }
+}
+
+@media (min-width: 200px) and (max-width: 500px) {
+  /* Adding class for new NavBarItems */
+  .navBarItemJS {
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-family: "Merriweather", serif;
+    font-size: 0.7em;
+    text-align: center;
+  }
+
+  .active__state {
+    background-color: #cc1;
   }
 }
