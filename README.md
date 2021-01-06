@@ -24,3 +24,10 @@ Images and base text obtained from [National Geographic website](https://www.nat
 
 ### Author(s)
  * Hiago Augusto Koziel Rahmig - <hiagokoziel100@gmail.com>
+ 
+ ## Project 2 JavaScript: Landing Page
+
+Project description: Based on the [project code provided](https://github.com/udacity/fend/tree/refresh-2019/projects/landing-page) and the [project rubric](https://review.udacity.com/#!/rubrics/2658/view), a navbar should be dynamically added through JavaScript.
+
+### Author(s)
+ * Hiago Augusto Koziel Rahmig - <hiagokoziel100@gmail.com>
