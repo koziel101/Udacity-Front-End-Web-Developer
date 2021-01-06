@@ -24,11 +24,9 @@ let isInViewport = function (section) {
 
 // Adds eventListener for when user scrolls. Also sets activeSection to which section is currently on the Viewport.
 const monitorSections = function (section) {
-    let last_known_scroll_position = 0;
     let inViewport = false;
 
     document.addEventListener('scroll', function (e) {
-        last_known_scroll_position = isInViewport(section);
 
         if (isInViewport(section)) {
             inViewport = true;
@@ -57,16 +55,12 @@ const monitorSections = function (section) {
 }
 
 // Building the navBar
-const div = document.createElement("div");
-
 for (section of sections) {
     let newSectionNavBar = document.createElement("li");
     newSectionNavBar.textContent = (section.dataset.nav);
     newSectionNavBar.className = "navBarItemJS";
-    div.appendChild(newSectionNavBar);
+    navBar.appendChild(newSectionNavBar);
 }
-
-navBar.appendChild(div);
 
 // Starts monitoring the user's scrolling
 for (section of sections) {
@@ -89,11 +83,7 @@ for (btn of btns) {
         // If the section is clicked, scroll to it
         for (section of sections) {
             if (this.textContent === section.dataset.nav) {
-                const top = section.getBoundingClientRect().top + window.pageYOffset
-                window.scrollTo({
-                    top, // scroll so that the element is at the top of the view
-                    behavior: 'smooth' // smooth scroll
-                })
+                section.scrollIntoView({ behavior: 'smooth' });
             }
         }
     });
