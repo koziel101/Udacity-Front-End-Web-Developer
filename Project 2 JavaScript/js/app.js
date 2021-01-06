@@ -43,7 +43,7 @@ let monitorSections = function (section) {
                 current[0].className = current[0].className.replace(" active__state", "");
             }
 
-            // Add the active class to the current/clicked button
+            // Add the active class to the current/clicked NavBarItem
             for (btn of btns) {
                 if (btn.textContent === section.dataset.nav) {
                     btn.className += " active__state";
@@ -81,17 +81,26 @@ for (btn of btns) {
     btn.addEventListener("click", function () {
         var current = document.getElementsByClassName("active__state");
 
-        // If there's no active class
+        // If there's an active class
         if (current.length > 0) {
             current[0].className = current[0].className.replace(" active__state", "");
         }
 
         // Add the active class to the current/clicked button
         this.className += " active__state";
+
+        // If the section is clicked, scroll to it
+        for (section of sections) {
+            if (this.textContent === section.dataset.nav) {
+                const top = section.getBoundingClientRect().top + window.pageYOffset
+                window.scrollTo({
+                    top, // scroll so that the element is at the top of the view
+                    behavior: 'smooth' // smooth scroll
+                })
+            }
+        }
     });
 }
-
-// Scroll to anchor ID using scrollTO event
 
 // Scroll to section on link click
 
