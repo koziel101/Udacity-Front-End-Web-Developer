@@ -28,7 +28,7 @@ const monitorSections = function (section) {
 
     document.addEventListener('scroll', function (e) {
 
-        if (isInViewport(section)) {
+        if (isInViewport(section.getElementsByClassName("landing__container")[0].getElementsByTagName("h2")[0])) {
             inViewport = true;
             activeSection = section;
 
