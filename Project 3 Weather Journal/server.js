@@ -28,3 +28,19 @@ function listening(req, res) {
     console.log("Server running");
     console.log(`Running on localhost: ${port}`);
 }
+
+// GET Request
+app.get('/all', getData);
+
+function getData(req, res) {
+    console.log("Testing Get");
+    console.log(projectData);
+    res.send(projectData);
+}
+
+// POST Request
+app.post('/addWeather', addWeather);
+
+function addWeather(req, res) {
+    console.log("Testing Post");
+}
