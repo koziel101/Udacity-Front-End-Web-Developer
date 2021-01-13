@@ -1,6 +1,7 @@
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 
+// Data will contain all data of the project, where projectData will have only the last entry
 const data = [];
 
 // Require Express to run server and routes
@@ -35,15 +36,28 @@ function listening(req, res) {
 app.get('/all', getData);
 
 function getData(req, res) {
-    console.log("Data retrieve: ");
+    console.log("ProjectData retrieve: ");
     console.log(projectData);
     res.send(projectData);
+
+    console.log("Data retrieve: ");
+    console.log(data);
 }
 
 // POST Request
 app.post('/addWeather', addWeather);
 
 function addWeather(req, res) {
+    // data is an array that contains all the previous data
+    newEntry = {
+        city: req.body.city,
+        currentTemp: req.body.currentTemp,
+        feeling: req.body.feeling,
+        newDate: req.body.newDate
+    }
+    data.push(newEntry);
+
+    // projectData contains only the latest data
     projectData = req.body;
     res.send(projectData);
 }
