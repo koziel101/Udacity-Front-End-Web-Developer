@@ -1,6 +1,6 @@
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Personal API Key for OpenWeatherMap API
 // To call OpenWeather API by Zip Code:
@@ -25,10 +25,11 @@ const postData = async(url = '', data = {}) => {
 
     try {
         const newData = await response.json();
+        console.log("New data received: ");
         console.log(newData);
         return newData;
     } catch (error) {
-        console.log("error" + error);
+        console.log("Error" + error);
     }
 }
 
@@ -37,11 +38,18 @@ document.getElementById('generate').addEventListener('click', buttonClicked);
 
 function buttonClicked(e) {
     const zipCode = document.getElementById('zip').value;
+    const feeling = document.getElementById('feelings').value;
     if (zipCode.length != 5) {
         window.alert("Zip code must have 5 numbers! It currently has " + zipCode.length + " characters.");
     } else {
         if (isNumeric(zipCode)) {
-            getWeather(baseUrl, zipCode, apiKey, celsiusMetric);
+            getWeather(baseUrl, zipCode, apiKey, celsiusMetric).then(function(data) {
+                // Saving data with POST request
+                console.log("Data saved:");
+                postData("/addWeather", { city: data.name, currentTemp: data.main.temp, feeling: feeling, newDate: newDate });
+            }).then(() =>
+                updateUI()
+            )
         } else {
             window.alert("Zip code must be only numbers!");
         }
@@ -57,11 +65,25 @@ const getWeather = async(baseURL, zipCode, key, celsiusMetric) => {
     const res = await fetch(baseURL + zipCode + key + celsiusMetric);
     try {
         const data = await res.json();
-        console.log(data)
+        console.log("Data received from the Weather API:");
+        console.log(data);
         return data;
     } catch (error) {
         console.log("Error: ", error);
         // appropriately handle the error
+    }
+}
+
+const updateUI = async() => {
+    const request = await fetch('/all');
+    try {
+        const allData = await request.json();
+        document.getElementById('date').innerHTML = "Date: " + allData.newDate;
+        document.getElementById('temp').innerHTML = "Current temperature: " + allData.currentTemp;
+        document.getElementById('content').innerHTML = "How you are feeling: " + allData.feeling;
+
+    } catch (error) {
+        console.log("error", error);
     }
 }
 

@@ -35,7 +35,7 @@ function listening(req, res) {
 app.get('/all', getData);
 
 function getData(req, res) {
-    console.log("Testing Get");
+    console.log("Data retrieve: ");
     console.log(projectData);
     res.send(projectData);
 }
@@ -44,10 +44,6 @@ function getData(req, res) {
 app.post('/addWeather', addWeather);
 
 function addWeather(req, res) {
-    //projectData = req.body;
-    //res.send(projectData);
-    data.push(req.body);
-    console.log("Data provided:");
-    console.log(data);
-    res.send("Weather added!");
+    projectData = req.body;
+    res.send(projectData);
 }

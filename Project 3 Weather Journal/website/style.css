@@ -26,6 +26,10 @@ body {
     padding: 15px;
 }
 
+#generate {
+    margin-bottom: 50px;
+}
+
 .entry {
     background: rgba(59, 74, 107, .4);
 }
