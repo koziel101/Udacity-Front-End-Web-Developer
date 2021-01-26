@@ -1,8 +1,20 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const API_KEY = process.env.API_KEY;
-
 const baseUrl = 'https://api.meaningcloud.com/sentiment-2.1?key=';
+const jsonSelector = "&of=json&txt=";
+const lang = "&lang=en";
+/*
+Example of working URL:
+https://api.meaningcloud.com/sentiment-2.1?key=c186ca2c0398960fffe88481da466218&of=json&txt=Main%20dishes%20were%20quite%20good%2C%20but%20desserts%20were%20too%20sweet%20for%20me.&lang=en
+
+Breakthrough of the URL:
+https://api.meaningcloud.com/sentiment-2.1?key=      (baseUrl)
+c186ca2c0398960fffe88481da466218                     (API_KEY)
+&of=json&txt=                                        (jsonSelector)
+Text enter by user                                   ()
+&lang=en                                             (lang)
+*/
 
 var path = require('path')
 const express = require('express')
