@@ -19,7 +19,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-                },
+            },
         ]
     },
     plugins: [
@@ -30,7 +30,11 @@ module.exports = {
         new MiniCssExtractPlugin({ filename: "[name].css" }),
         new WorkboxPlugin.GenerateSW()
     ],
-     optimization: {
+    optimization: {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    },
+    output: {
+        libraryTarget: 'var',
+        library: 'Client',
     }
 }

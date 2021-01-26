@@ -16,6 +16,11 @@ Text enter by user                                   ()
 &lang=en                                             (lang)
 */
 
+//Sending API Key with GET request
+app.get('/key', function (req, res) {
+    res.send({ key: API_KEY })
+})
+
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
