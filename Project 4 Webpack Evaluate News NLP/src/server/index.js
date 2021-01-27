@@ -50,38 +50,19 @@ app.get('/test', function (req, res) {
 console.log("Testing");
 console.log(`Your API key is ${process.env.API_KEY}`);
 
-app.post('/sentiment', async (req, res) => {
-    console.log("Request of the body: ")
-    console.log(req.body)
-
-    //Make a request to the API
-    console.log("How the URL is:");
-    console.log(`${baseUrl}${API_KEY}${jsonSelector}${req.body.txt}${lang}`);
-    const response = await fetch(`${baseUrl}${API_KEY}${jsonSelector}${req.body.txt}${lang}`);
-    try {
-        const data = await response.json();
-        res.send(data)
-        res.json()
-    } catch (error) {
-        console.log(error.message)
-    }
-})  
-
-
 // Post Route
 app.post('/sentiment', addPost);
 async function addPost(req,res){
     //get and set url:
     newEntry = req.body
     input_url = req.body.url;
-    console.log("input_url now set to: ", input_url)
+    console.log("URL is: ", input_url)
     
     //get data from input:
     console.log(`${baseUrl}${API_KEY}${jsonSelector}${req.body.txt}${lang}`);
     const info = await fetch(`${baseUrl}${API_KEY}${jsonSelector}${req.body.txt}${lang}`)
     //translate response obj to json:
     .then( (info) => info.json())
-    //return json obj to client thru res.send():
     .then( data => { 
         res.send(data)})
     //handle error:
