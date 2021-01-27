@@ -1,57 +1,21 @@
-function postInfo(myData) {
-    console.log("Test to get the api key");
-    console.log(myData.key);
-    getSentiment(baseUrl, zipCode, apiKey, celsiusMetric).then(function (data) {
-        // Saving data with POST request
-        console.log("Data saved:");
-        postData("/sentiment", { city: data.name, currentTemp: data.main.temp, feeling: feeling, newDate: newDate });
-    }).then(() =>
-        updateUI()
-    )
-}
-
-const getSentiment = async (baseURL, zipCode, key, celsiusMetric) => {
-    const res = await fetch(baseURL + zipCode + key + celsiusMetric);
-    try {
-        const data = await res.json();
-        console.log("Data received from the Weather API:");
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.log("Error: ", error);
-        // appropriately handle the error
-    }
-}
-
+import { text } from "body-parser";
 
 document.getElementById('btnSubmit').addEventListener('click', buttonClicked);
 
 function buttonClicked(e) {
-    console.log("Heyyyy")
-
-}
-
-const postData = async (textProvidedUser = {}) => {
-    console.log(textUser)
-    const response = await fetch("http://localhost:8080/test", {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        // Body data type must match "Content-Type" header        
-        body: JSON.stringify({ value: textProvidedUser }),
-    });
-
-    try {
-        const newData = await response.json();
-        console.log("New data received: ");
-        console.log(newData);
-        updateUI(newData);
-        return newData;
-    }
-    catch (error) {
-        console.log("Error ", error);
+    const textUser = document.getElementById('text__user').value;
+    // Data that is in server\index.js :
+    // baseUrl, API_KEY, jsonSelector, lang
+    if (textUser.trim() === "") {
+        window.alert("Text cannot be blank!");
+    } else {
+        console.log("baseurl: " + baseUrl)
+        getSentiment(baseUrl, API_KEY, jsonSelector, textUser, lang).then(function (data) {
+            // Saving data with POST request
+            postData("/sentiment", { polarity: data.polarity, subjectivity: data.subjectivity, confidence: data.confidence, irony: data.irony });
+        }).then(() =>
+            updateUI()
+        )
     }
 }
 
@@ -86,4 +50,39 @@ function polarityAnalysis(analysis) {
     return result;
 }
 
-export { postInfo }
+const getSentiment = async (baseUrl, API_KEY, jsonSelector, textUser, lang) => {
+    const res = await fetch(baseUrl + API_KEY + jsonSelector + textUser + lang);
+    try {
+        const data = await res.json();
+        console.log("Data received from the Sentiment API:");
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.log("Error: ", error);
+        // appropriately handle the error
+    }
+}
+
+const postData = async (url = '', data = {}) => {
+    console.log(data);
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // Body data type must match "Content-Type" header        
+        body: JSON.stringify(data),
+    });
+
+    try {
+        const newData = await response.json();
+        console.log("New data received: ");
+        console.log(newData);
+        return newData;
+    } catch (error) {
+        console.log("Error" + error);
+    }
+}
+
+export { buttonClicked }
