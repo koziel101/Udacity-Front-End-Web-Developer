@@ -4,13 +4,13 @@ function postInfo(myData) {
     getSentiment(baseUrl, zipCode, apiKey, celsiusMetric).then(function (data) {
         // Saving data with POST request
         console.log("Data saved:");
-        postData("/addWeather", { city: data.name, currentTemp: data.main.temp, feeling: feeling, newDate: newDate });
+        postData("/sentiment", { city: data.name, currentTemp: data.main.temp, feeling: feeling, newDate: newDate });
     }).then(() =>
         updateUI()
     )
 }
 
-const getWeather = async (baseURL, zipCode, key, celsiusMetric) => {
+const getSentiment = async (baseURL, zipCode, key, celsiusMetric) => {
     const res = await fetch(baseURL + zipCode + key + celsiusMetric);
     try {
         const data = await res.json();
@@ -23,9 +23,15 @@ const getWeather = async (baseURL, zipCode, key, celsiusMetric) => {
     }
 }
 
-const postData = async (textProvidedUser = {}) => {
 
-    console.log("Sera?")
+document.getElementById('btnSubmit').addEventListener('click', buttonClicked);
+
+function buttonClicked(e) {
+    console.log("Heyyyy")
+
+}
+
+const postData = async (textProvidedUser = {}) => {
     console.log(textUser)
     const response = await fetch("http://localhost:8080/test", {
         method: 'POST',
@@ -50,7 +56,34 @@ const postData = async (textProvidedUser = {}) => {
 }
 
 export function updateUI(newData) {
+    document.getElementById('polarity').innerHTML = "Polarity: " + polarityAnalysis(newData.score_tag);
+    document.getElementById('subjectivity').innerHTML = "subjectivity: " + newData.subjectivity;
+    document.getElementById('confidence').innerHTML = "Confidence of the text: " + newData.confidence + "%";
+    document.getElementById('irony').innerHTML = "Irony: " + newData.irony;
+}
 
+function polarityAnalysis(analysis) {
+    let result;
+    switch (analysis) {
+        case "P+":
+            result = "Strong Positive";
+            break;
+        case "P":
+            result = "Positive";
+            break;
+        case "NEU":
+            result = "Neutral";
+            break;
+        case "N":
+            result = "Negative";
+            break;
+        case "N+":
+            result = "Strong Negative";
+            break;
+        case "NONE":
+            result = "No Sentiment";
+    }
+    return result;
 }
 
 export { postInfo }
