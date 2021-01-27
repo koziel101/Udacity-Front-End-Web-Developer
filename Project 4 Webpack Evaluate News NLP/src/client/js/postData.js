@@ -1,18 +1,3 @@
-// getApiKey is a function to get apikey
-getApiKey('/key')
-    .then(function (data) {
-        let myData = {
-            key: data.key,
-            lang: 'en',
-            url: formText
-        }
-        // here you need to call your function that made analysis data
-        postInfo(myData)
-            .then(function (data) {
-                document.getElementById('agreement').innerHTML = data.agreement;
-            });
-    })
-
 function postInfo(myData) {
     console.log("Test to get the api key");
     console.log(myData.key);
