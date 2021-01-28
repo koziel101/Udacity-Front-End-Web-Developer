@@ -16,6 +16,9 @@ Text enter by user                                   ()
 &lang=en                                             (lang)
 */
 
+//console.log("Testing");
+//onsole.log(`Your API key is ${process.env.API_KEY}`);
+
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
@@ -29,44 +32,30 @@ app.use(bodyParser.json());
 // Cors for cross origin allowance
 const cors = require('cors');
 app.use(cors());
-
 app.use(express.static('dist'))
-
-console.log(__dirname)
-
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
 })
 
-// designates what port the app will listen to for incoming requests
-app.listen(8081, function () {
-    console.log('Example app listening on port 8081!')
+// Designate port 3000 to listen for incoming requests
+app.listen(3000, function () {
+    console.log('Example app listening on port 3000!')
 })
 
+// get and post route for /addSentiment
+app.get('/addSentiment', function (req, res) {
+    res.send("Hey")
+    console.log("Test")
+})
+
+app.post('/addSentiment', (req, res) => {
+    console.log('I got a request.')
+    const data = req.body;
+    console.log(data);
+});
+
+
+// get route for /test
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
-
-console.log("Testing");
-console.log(`Your API key is ${process.env.API_KEY}`);
-
-// Post Route
-app.post('/sentiment', addPost);
-async function addPost(req,res){
-    //get and set url:
-    newEntry = req.body
-    input_url = req.body.url;
-    console.log("URL is: ", input_url)
-    
-    //get data from input:
-    console.log(`${baseUrl}${API_KEY}${jsonSelector}${req.body.txt}${lang}`);
-    const info = await fetch(`${baseUrl}${API_KEY}${jsonSelector}${req.body.txt}${lang}`)
-    //translate response obj to json:
-    .then( (info) => info.json())
-    .then( data => { 
-        res.send(data)})
-    //handle error:
-    .catch((error) => {
-        console.log("error in promise (server side): ", error);
-    });
-};
