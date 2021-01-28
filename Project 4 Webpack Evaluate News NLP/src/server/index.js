@@ -24,6 +24,8 @@ const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
 const app = express()
 const bodyParser = require('body-parser')
+const data = [];
+const fetch = require("node-fetch");
 
 /* Middleware*/
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -50,8 +52,17 @@ app.get('/addSentiment', function (req, res) {
 
 app.post('/addSentiment', (req, res) => {
     console.log('I got a request.')
-    const data = req.body;
+    data.push(req.body);
     console.log(data);
+    let newEntry = {
+        textUser: req.body.textUser
+    }
+    getSentimentAPI(baseUrl, API_KEY, jsonSelector, newEntry.textUser, lang);
+
+    //console.log("New Entry:")
+    //console.log(newEntry)
+    //console.log("Text entered by user:")
+    //console.log(newEntry.textUser)
 });
 
 
@@ -59,3 +70,19 @@ app.post('/addSentiment', (req, res) => {
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
+
+// Calling the API
+const getSentimentAPI = async (baseUrl, API_KEY, jsonSelector, textUser, lang) => {
+
+    const res = await fetch(baseUrl + API_KEY + jsonSelector + textUser + lang)
+    try {
+
+        const data = await res.json();
+        console.log("Data received from the server: ")
+        console.log(data)
+        return data;
+    } catch (error) {
+        console.log("Error: ", error);
+        // appropriately handle the error
+    }
+}

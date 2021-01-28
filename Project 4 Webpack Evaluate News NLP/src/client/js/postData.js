@@ -34,11 +34,7 @@ const postData = async (url = '', data = {}) => {
     }
 }
 
-
-
 /*
-
-
 function buttonClicked(e) {
     const textUser = document.getElementById('text__user').value;
     // Data that is in server\index.js :
@@ -97,28 +93,6 @@ const getSentiment = async (baseUrl, API_KEY, jsonSelector, textUser, lang) => {
     } catch (error) {
         console.log("Error: ", error);
         // appropriately handle the error
-    }
-}
-
-const postData = async (url = '', data = {}) => {
-    console.log(data);
-    const response = await fetch(url, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        // Body data type must match "Content-Type" header        
-        body: JSON.stringify(data),
-    });
-
-    try {
-        const newData = await response.json();
-        console.log("New data received: ");
-        console.log(newData);
-        return newData;
-    } catch (error) {
-        console.log("Error" + error);
     }
 }
 
