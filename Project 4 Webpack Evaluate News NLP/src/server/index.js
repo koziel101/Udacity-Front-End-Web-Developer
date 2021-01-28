@@ -16,9 +16,6 @@ Text enter by user                                   ()
 &lang=en                                             (lang)
 */
 
-//console.log("Testing");
-//onsole.log(`Your API key is ${process.env.API_KEY}`);
-
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
@@ -43,15 +40,10 @@ app.get('/', function (req, res) {
 
 // Designate port 3000 to listen for incoming requests
 app.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+    console.log('Server side is running and listening on port 3000!')
 })
 
-// get and post route for /addSentiment
-app.get('/addSentiment', function (req, res) {
-    res.send("Hey")
-    console.log("Test")
-})
-
+// post route for /addSentiment
 app.post('/addSentiment', (req, res) => {
     console.log('I got a request.')
     data.push(req.body);
@@ -63,10 +55,10 @@ app.post('/addSentiment', (req, res) => {
     getSentimentAPI(baseUrl, API_KEY, jsonSelector, newEntry.textUser, lang)
         .then(function (data) {
             app.get('/return_data', function (req, res) {
-                console.log("Retorno do usuario: ")
-                console.log(apiJsonResponse)
-                res.send({ apiData: apiJsonResponse })
-
+                //console.log("Retorn for the user: ")
+                //console.log(apiJsonResponse)
+                res.send(apiJsonResponse)
+                res.end();
             })
         })
 });
@@ -87,7 +79,6 @@ const getSentimentAPI = async (baseUrl, API_KEY, jsonSelector, textUser, lang) =
 
     const res = await fetch(baseUrl + API_KEY + jsonSelector + textUser + lang)
     try {
-
         const data = await res.json();
         console.log("Data received from the server: ")
         console.log(data)

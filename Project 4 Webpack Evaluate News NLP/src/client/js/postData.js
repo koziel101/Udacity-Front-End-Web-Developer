@@ -10,6 +10,21 @@ function buttonClicked(e) {
         window.alert("Text cannot be blank!");
     } else {
         postData('http://localhost:3000/addSentiment', { textUser: appData })
+            .then
+        console.log("THEN statement starting")
+        fetch("http://localhost:3000/return_data", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ text: apiJsonResponse })
+        }).then(res => res.json())
+            .then(data => {
+                console.log("Initial print")
+                console.log(data)
+                console.log("Final print")
+            })
     }
 }
 
@@ -35,23 +50,6 @@ const postData = async (url = '', data = {}) => {
 }
 
 /*
-function buttonClicked(e) {
-    const textUser = document.getElementById('text__user').value;
-    // Data that is in server\index.js :
-    // baseUrl, API_KEY, jsonSelector, lang
-    if (textUser.trim() === "") {
-        window.alert("Text cannot be blank!");
-    } else {
-        console.log("baseurl: " + baseUrl)
-        getSentiment(baseUrl, API_KEY, jsonSelector, textUser, lang).then(function (data) {
-            // Saving data with POST request
-            postData("/sentiment", { polarity: data.polarity, subjectivity: data.subjectivity, confidence: data.confidence, irony: data.irony });
-        }).then(() =>
-            updateUI()
-        )
-    }
-}
-
 export function updateUI(newData) {
     document.getElementById('polarity').innerHTML = "Polarity: " + polarityAnalysis(newData.score_tag);
     document.getElementById('subjectivity').innerHTML = "subjectivity: " + newData.subjectivity;
@@ -82,20 +80,6 @@ function polarityAnalysis(analysis) {
     }
     return result;
 }
-
-const getSentiment = async (baseUrl, API_KEY, jsonSelector, textUser, lang) => {
-    const res = await fetch(baseUrl + API_KEY + jsonSelector + textUser + lang);
-    try {
-        const data = await res.json();
-        console.log("Data received from the Sentiment API:");
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.log("Error: ", error);
-        // appropriately handle the error
-    }
-}
-
 */
 
 export { buttonClicked }
