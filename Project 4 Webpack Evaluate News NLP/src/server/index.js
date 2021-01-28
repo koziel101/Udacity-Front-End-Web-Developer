@@ -25,6 +25,8 @@ const mockAPIResponse = require('./mockAPI.js')
 const app = express()
 const bodyParser = require('body-parser')
 const data = [];
+let latestEntry = null;
+let apiJsonResponse = null;
 const fetch = require("node-fetch");
 
 /* Middleware*/
@@ -57,18 +59,27 @@ app.post('/addSentiment', (req, res) => {
     let newEntry = {
         textUser: req.body.textUser
     }
-    getSentimentAPI(baseUrl, API_KEY, jsonSelector, newEntry.textUser, lang);
+    latestEntry = newEntry;
+    getSentimentAPI(baseUrl, API_KEY, jsonSelector, newEntry.textUser, lang)
+        .then(function (data) {
+            app.get('/return_data', function (req, res) {
+                console.log("Retorno do usuario: ")
+                console.log(apiJsonResponse)
+                res.send({ apiData: apiJsonResponse })
 
-    //console.log("New Entry:")
-    //console.log(newEntry)
-    //console.log("Text entered by user:")
-    //console.log(newEntry.textUser)
+            })
+        })
 });
 
 
 // get route for /test
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
+})
+
+// Returning API data to the client side
+app.post("/return_data", (req, res) => {
+    return { latestEntry };
 })
 
 // Calling the API
@@ -80,6 +91,7 @@ const getSentimentAPI = async (baseUrl, API_KEY, jsonSelector, textUser, lang) =
         const data = await res.json();
         console.log("Data received from the server: ")
         console.log(data)
+        apiJsonResponse = data;
         return data;
     } catch (error) {
         console.log("Error: ", error);
