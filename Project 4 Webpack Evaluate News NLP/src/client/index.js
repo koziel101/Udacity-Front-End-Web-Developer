@@ -7,8 +7,8 @@ import './styles/form.scss'
 import './styles/header.scss'
 
 // Importing image files for the footer
-import gitHubIconIcon from "./images/github.jpg";
-import linkedInIconIcon from "./images/logo-linkedin.jpg";
+import gitHubIconIcon from "./images/github.png";
+import linkedInIconIcon from "./images/logo-linkedin.png";
 import faceBookIconIcon from "./images/logo-fb.png";
 
 
