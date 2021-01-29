@@ -13,15 +13,14 @@ function buttonClicked(e) {
             .then(() => fetch("http://localhost:3000/return_data"))
             .then(res => res.json())
             .then(data => {
-                console.log("Initial print")
+                console.log("New data was received from server")
                 console.log(data)
-                console.log("Final print")
+                updateUI(data);
             })
     }
 }
 
 const postData = async (url = '', data = {}) => {
-    console.log(data);
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -34,22 +33,21 @@ const postData = async (url = '', data = {}) => {
 
     try {
         const newData = await response.json();
-        console.log(newData);
         return newData;
     } catch (error) {
         console.log("error", error);
     }
 }
 
-/*
 export function updateUI(newData) {
-    document.getElementById('polarity').innerHTML = "Polarity: " + polarityAnalysis(newData.score_tag);
-    document.getElementById('subjectivity').innerHTML = "subjectivity: " + newData.subjectivity;
+    document.getElementById('agreement').innerHTML = "Agreement of the text: " + newData.agreement.toLowerCase();
     document.getElementById('confidence').innerHTML = "Confidence of the text: " + newData.confidence + "%";
-    document.getElementById('irony').innerHTML = "Irony: " + newData.irony;
+    document.getElementById('irony').innerHTML = "Irony of the text: " + newData.irony.toLowerCase();
+    document.getElementById('subjectivity').innerHTML = "Subjectivity of the text: " + newData.subjectivity.toLowerCase();
+    document.getElementById('score__tag').innerHTML = "Overall score of the text: " + agreementAnalysis(newData.score_tag);
 }
 
-function polarityAnalysis(analysis) {
+function agreementAnalysis(analysis) {
     let result;
     switch (analysis) {
         case "P+":
@@ -72,6 +70,5 @@ function polarityAnalysis(analysis) {
     }
     return result;
 }
-*/
 
 export { buttonClicked }
