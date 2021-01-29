@@ -18,6 +18,10 @@ function agreementAnalysis(analysis) {
             break;
         case "NONE":
             result = "No Sentiment";
+            break;
+        default:
+            result = "Error on sentiment"
+            break;
     }
     return result;
 }
