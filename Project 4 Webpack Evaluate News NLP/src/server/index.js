@@ -22,7 +22,7 @@ const mockAPIResponse = require('./mockAPI.js')
 const app = express()
 const bodyParser = require('body-parser')
 const data = [];
-let latestEntry = null;
+let latestEntry = {};
 let apiJsonResponse = null;
 const fetch = require("node-fetch");
 
@@ -51,17 +51,13 @@ app.post('/addSentiment', (req, res) => {
     let newEntry = {
         textUser: req.body.textUser
     }
-    latestEntry = newEntry;
     getSentimentAPI(baseUrl, API_KEY, jsonSelector, newEntry.textUser, lang)
         .then(function (data) {
-            app.get('/return_data', function (req, res) {
-                //console.log("Retorn for the user: ")
-                //console.log(apiJsonResponse)
-                res.send(apiJsonResponse)
-                res.end();
-            })
+            latestEntry = data          //Updated part
+            res.send(latestEntry)
+            res.end();
         })
-});
+})
 
 
 // get route for /test
@@ -72,6 +68,10 @@ app.get('/test', function (req, res) {
 // Returning API data to the client side
 app.post("/return_data", (req, res) => {
     return { latestEntry };
+})
+
+app.get("/return_data", (req, res) => {
+    res.send(latestEntry)
 })
 
 // Calling the API

@@ -10,16 +10,8 @@ function buttonClicked(e) {
         window.alert("Text cannot be blank!");
     } else {
         postData('http://localhost:3000/addSentiment', { textUser: appData })
-            .then
-        console.log("THEN statement starting")
-        fetch("http://localhost:3000/return_data", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ text: apiJsonResponse })
-        }).then(res => res.json())
+            .then(() => fetch("http://localhost:3000/return_data"))
+            .then(res => res.json())
             .then(data => {
                 console.log("Initial print")
                 console.log(data)
