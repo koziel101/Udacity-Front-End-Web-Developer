@@ -1,5 +1,5 @@
 form {
-    border: 1px solid #545454;
+    border: 1px solid #414141;
     border-radius: 3px;
     padding: 40px;
 }
@@ -9,4 +9,16 @@ input {
     width: 100%;
     line-height: 16px;
     margin: 10px 0;
+}
+
+#entryHolder {
+    margin-top: 20px;
+    background-color: rgb(202, 202, 202);
+}
+
+.result__item {
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    text-shadow: 1.5px 1.5px #000000;
+    font-size: 18px;
 }
