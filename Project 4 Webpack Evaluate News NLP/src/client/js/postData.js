@@ -1,4 +1,5 @@
-import { text } from "body-parser";
+import { validateUserEntry } from "./checkTextUser.js";
+import { agreementAnalysis } from "./analyseAgreement.js";
 
 let appData = {};
 
@@ -6,9 +7,7 @@ document.getElementById('btnSubmit').addEventListener('click', buttonClicked);
 
 function buttonClicked(e) {
     appData = document.getElementById('text__user').value;
-    if (appData.trim() === "") {
-        window.alert("Text cannot be blank!");
-    } else {
+    if (validateUserEntry(appData)) {
         postData('http://localhost:3000/addSentiment', { textUser: appData })
             .then(() => fetch("http://localhost:3000/return_data"))
             .then(res => res.json())
@@ -17,6 +16,8 @@ function buttonClicked(e) {
                 console.log(data)
                 updateUI(data);
             })
+    } else {
+        window.alert("Text cannot be blank!");
     }
 }
 
@@ -45,30 +46,6 @@ export function updateUI(newData) {
     document.getElementById('irony').innerHTML = "Irony of the text: " + newData.irony.toLowerCase();
     document.getElementById('subjectivity').innerHTML = "Subjectivity of the text: " + newData.subjectivity.toLowerCase();
     document.getElementById('score__tag').innerHTML = "Overall score of the text: " + agreementAnalysis(newData.score_tag);
-}
-
-function agreementAnalysis(analysis) {
-    let result;
-    switch (analysis) {
-        case "P+":
-            result = "Strong Positive";
-            break;
-        case "P":
-            result = "Positive";
-            break;
-        case "NEU":
-            result = "Neutral";
-            break;
-        case "N":
-            result = "Negative";
-            break;
-        case "N+":
-            result = "Strong Negative";
-            break;
-        case "NONE":
-            result = "No Sentiment";
-    }
-    return result;
 }
 
 export { buttonClicked }
