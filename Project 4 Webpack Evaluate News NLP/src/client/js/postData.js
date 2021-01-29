@@ -7,7 +7,12 @@ document.getElementById('btnSubmit').addEventListener('click', buttonClicked);
 
 function buttonClicked(e) {
     appData = document.getElementById('text__user').value;
-    if (validateUserEntry(appData)) {
+    let urlValidation = validateUserEntry(appData);
+    if (urlValidation === 0) {
+        window.alert("Text cannot be blank!");
+    } else if (urlValidation === 1) {
+        window.alert("This is not a valid URL! Don't forget the 'www.'");
+    } else {
         postData('http://localhost:3000/addSentiment', { textUser: appData })
             .then(() => fetch("http://localhost:3000/return_data"))
             .then(res => res.json())
@@ -16,8 +21,6 @@ function buttonClicked(e) {
                 console.log(data)
                 updateUI(data);
             })
-    } else {
-        window.alert("Text cannot be blank!");
     }
 }
 
