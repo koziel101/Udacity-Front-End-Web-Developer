@@ -1,0 +1,38 @@
+footer {
+    grid-area: ft;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgb(202, 202, 202);
+    padding: 10px;
+    padding-left: 50px;
+  }
+  
+  footer p {
+    font-style: italic;
+    color: white;
+  }
+  
+  .footer__item {
+    margin-left: 15px;
+  }
+  
+  #github__logo {
+    width: 40px;
+    height: auto;
+  }
+  
+  #linkedin__logo {
+    width: 90px;
+    height: auto;
+  }
+  
+  #twitter__logo {
+    width: 80px;
+    height: auto;
+  }
+  
+  #fb__logo {
+    width: 50px;
+    height: auto;
+  }
