@@ -3,3 +3,31 @@ header {
     justify-content: space-between;
     padding: 10px 40px;
 }
+
+/* Decorations for the NavBar items */
+.nav__item {
+    width: auto;
+    height: auto;
+    padding: 5px;
+    text-align: center;
+    padding: 14px 16px;
+    color: rgb(73, 73, 73);
+}
+
+.link__decoration {
+    text-decoration: none;
+}
+
+#article__list {
+    grid-area: al;
+    background-color: rgb(122, 122, 122);
+    margin: 10px;
+    border-radius: 25px;
+}
+
+#nav__bar {
+    background-color: rgb(202, 202, 202);
+    width: 100%;
+    height: 30px;
+    padding-top: 10px;
+}
