@@ -1,5 +1,6 @@
-import { checkForName } from './js/nameChecker'
 import { handleSubmit } from './js/formHandler'
+import { agreementAnalysis } from './js/analyseAgreement'
+import { validateUserEntry } from './js/checkTextUser'
 import './styles/resets.scss'
 import './styles/base.scss'
 import './styles/footer.scss'
@@ -20,6 +21,7 @@ var faceBook = document.querySelector("#fb__logo");
 faceBook.src = faceBookIconIcon;
 
 export {
-    checkForName,
-    handleSubmit
+    handleSubmit,
+    agreementAnalysis,
+    validateUserEntry
 }
