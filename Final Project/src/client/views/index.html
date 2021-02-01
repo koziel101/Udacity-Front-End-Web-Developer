@@ -4,14 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Planner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 
 <body>
     <main class="main__container">
         <div id="nav__bar">
             <a href="index.html" class="nav__item link__decoration">Home</a>
-            <a href="newtrip" class="nav__item link__decoration">New trip</a>
-            <a href="mytrips.html" class="nav__item link__decoration">My trips</a>
+            <a href="#" class="nav__item link__decoration">New trip</a>
+            <a href="#" class="nav__item link__decoration">My trips</a>
+        </div>
+
+        <div class="jumbotron jumbotron-fluid center__text" id="new-form">
+            <div class="container form-item">
+                <label for="city-name">City name</label>
+                <input id="city" placeholder="Enter city name">
+            </div>
+            <div class="container form-item">
+                <label for="departure-date">Departure date</label>
+                <input type="date" id="city" placeholder="Enter country/city name">
+            </div>
+            <div class="container form-item">
+                <label for="return-date">Return date</label>
+                <input type="date" id="city" placeholder="Enter country/city name">
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-new-trip">New trip</button>
         </div>
     </main>
 </body>
