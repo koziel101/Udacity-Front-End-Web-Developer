@@ -1,13 +1,19 @@
 import { validateUserEntry } from "./checkTextUser.js";
+import { calculateDateDifference } from "./dayDifference"
 let appData = {};
+let departureDate = {};
+let returnDate = {};
+let dayDifference = {};
 
 document.getElementById('btn-new-trip').addEventListener('click', buttonClicked);
 
 function buttonClicked(e) {
     appData = document.getElementById('city').value;
+    departureDate = document.getElementById('departure-date').value;
+    returnDate = document.getElementById('return-date').value;
+    dayDifference = calculateDateDifference(departureDate);
 
-    let cityValidation = validateUserEntry(appData);
-    if (cityValidation) {
+    if (validateUserEntry(appData)) {
         // Sending data to server
         postData('http://localhost:3000/addCity', { cityProvided: appData })
             // Server processed the data provided. Code below is for the Client to retrieve the server's response from geonames.
@@ -16,11 +22,14 @@ function buttonClicked(e) {
             .then(data => {
                 if (data.totalResultsCount === 0) {
                     window.alert("City provided is not valid!");
+                } else if (!validateUserEntry(departureDate)) {
+                    window.alert("Please select a departure date!");
                 } else {
-                    console.log("New data was received from server")
-                    console.log("lat: " + data.geonames[0].lat)
-                    console.log("lng: " + data.geonames[0].lng)
-                    console.log(data.totalResultsCount)
+                    postData('http://localhost:3000/addWeather', {
+                        lat: data.geonames[0].lat,
+                        lng: data.geonames[0].lng,
+                        dayDifference: dayDifference
+                    })
                 }
             })
     } else {
