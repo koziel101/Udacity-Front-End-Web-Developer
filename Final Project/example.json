@@ -1,0 +1,25 @@
+{
+    "totalResultsCount": 1,
+    "geonames": [
+        {
+            "adminCode1": "44",
+            "lng": "140.14194",
+            "geonameId": 8997849,
+            "toponymName": "Kawaii",
+            "countryId": "1861060",
+            "fcl": "P",
+            "population": 0,
+            "countryCode": "JP",
+            "name": "Kawaii",
+            "fclName": "city, village,...",
+            "adminCodes1": {
+                "ISO3166_2": "06"
+            },
+            "countryName": "Japan",
+            "fcodeName": "populated place",
+            "adminName1": "Yamagata",
+            "lat": "37.92061",
+            "fcode": "PPL"
+        }
+    ]
+}

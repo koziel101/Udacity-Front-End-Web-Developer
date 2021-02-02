@@ -10,18 +10,20 @@ function buttonClicked(e) {
     if (cityValidation) {
         // Sending data to server
         postData('http://localhost:3000/addCity', { cityProvided: appData })
-        /* 
-            // Server processed the data provided. Code below is for the Client to retrieve the server's response.
-            .then(() => fetch("http://localhost:3000/return_data"))
+            // Server processed the data provided. Code below is for the Client to retrieve the server's response from geonames.
+            .then(() => fetch("http://localhost:3000/validateCity"))
             .then(res => res.json())
             .then(data => {
-                console.log("New data was received from server")
-                console.log(data)
-                updateUI(data);
+                if (data.totalResultsCount === 0) {
+                    window.alert("City provided is not valid!");
+                } else {
+                    console.log("New data was received from server")
+                    console.log("lat: " + data.geonames[0].lat)
+                    console.log("lng: " + data.geonames[0].lng)
+                    console.log(data.totalResultsCount)
+                }
             })
-        */
     } else {
-
         window.alert("Text cannot be blank!");
     }
 }
