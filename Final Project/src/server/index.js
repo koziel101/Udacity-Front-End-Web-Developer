@@ -130,6 +130,15 @@ app.get("/validateCity", (req, res) => {
     res.send(latestEntryGeoNames)
 })
 
+// Returning Weatherbit API data to the client side
+app.post("/checkWeather", (req, res) => {
+    return { latestEntryWeatherBit };
+})
+
+app.get("/checkWeather", (req, res) => {
+    res.send(latestEntryWeatherBit)
+})
+
 // Calling weatherbit API to obtain the city's coodinations
 const getWeatherDetailsAPI = async (weatherbitCurrentBaseUrl, weatherbitCurrentLat, latValue, weatherbitCurrentLon, lngValue, weatherbitCurrentKey, WEATHERBIT_API_KEY) => {
 

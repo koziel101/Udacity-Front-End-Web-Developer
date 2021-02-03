@@ -4,6 +4,7 @@ let appData = {};
 let departureDate = {};
 let returnDate = {};
 let dayDifference = {};
+let hasTrip = false;
 
 document.getElementById('btn-new-trip').addEventListener('click', buttonClicked);
 
@@ -14,7 +15,7 @@ function buttonClicked(e) {
     dayDifference = calculateDateDifference(departureDate);
 
     if (validateUserEntry(appData)) {
-        // Sending data to server
+        // Sending data to server, so geonames API will get lat and lng
         postData('http://localhost:3000/addCity', { cityProvided: appData })
             // Server processed the data provided. Code below is for the Client to retrieve the server's response from geonames.
             .then(() => fetch("http://localhost:3000/validateCity"))
@@ -25,13 +26,25 @@ function buttonClicked(e) {
                 } else if (!validateUserEntry(departureDate)) {
                     window.alert("Please select a departure date!");
                 } else {
+                    // Data provided by user is valid. Sending lat, lng and dayDifference to server. Server will call Weatherbit API 
                     postData('http://localhost:3000/addWeather', {
                         lat: data.geonames[0].lat,
                         lng: data.geonames[0].lng,
                         dayDifference: dayDifference
                     })
+                        // Retrieving data provided by Weatherbit API
+                        .then(() => fetch("http://localhost:3000/checkWeather"))
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log("New data was received from weatherbit server")
+                            console.log(data.data[0].weather.description)
+                            console.log("Full info: ")
+                            console.log(data)
+                            updateUI(data);
+                        })
                 }
             })
+
     } else {
         window.alert("Text cannot be blank!");
     }
@@ -54,6 +67,18 @@ const postData = async (url = '', data = {}) => {
     } catch (error) {
         console.log("error", error);
     }
+}
+
+export function updateUI() {
+    if (!hasTrip) {
+        document.getElementById("no-trip-planned").remove();
+        hasTrip = true;
+    }
+    let mytrip = document.createElement('span');
+    mytrip.innerText = "My trip to: ";
+
+    let tripContent = document.getElementById("trip-content");
+    tripContent.insertAdjacentElement('afterbegin', mytrip)
 }
 
 export { buttonClicked }
