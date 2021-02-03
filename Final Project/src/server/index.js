@@ -1,9 +1,20 @@
 const dotenv = require('dotenv');
+dotenv.config();
+const WEATHERBIT_API_KEY = process.env.WEATHERBIT_API_KEY;
 
 // Details for geonames API request
 const geonamesBaseUrl = 'http://api.geonames.org/searchJSON?q=';
 const geonamesUsername = "&maxRows=1&username=hiagokoziel"
 // Example of working URL: http://api.geonames.org/searchJSON?q=hawaii&maxRows=1&username=hiagokoziel
+
+// Details for weatherbit API request
+const weatherbitCurrentBaseUrl = "https://api.weatherbit.io/v2.0/current?&";
+const weatherbitCurrentLat = "lat=";
+const weatherbitCurrentLon = "&lon=";
+const weatherbitCurrentKey = "&key=";
+// Example of working URL: 
+// https://api.weatherbit.io/v2.0/current?&lat=20.78785&lon=-156.38612&key=9c1232e0219649419a091ae456846ef9
+
 
 var path = require('path')
 const express = require('express')
@@ -59,11 +70,20 @@ app.post('/addWeather', (req, res) => {
     console.log('I got a request for weatherbit.')
     data.push(req.body);
     console.log(data)
-
     if (req.body.dayDifference > 5) {
         console.log("Date difference is higher than 5 days.")
     } else {
-        console.log("Date difference is equal o lower than 5 days.")
+        let newEntry = {
+            lng: req.body.lng,
+            lat: req.body.lat
+        }
+        // Getting the city's current weather
+        getWeatherDetailsAPI(weatherbitCurrentBaseUrl, weatherbitCurrentLat, newEntry.lat, weatherbitCurrentLon, newEntry.lng, weatherbitCurrentKey, WEATHERBIT_API_KEY)
+            .then(function (data) {
+                latestEntryWeatherBit = data
+                res.send(latestEntryWeatherBit)
+                res.end();
+            })
     }
 
     /*
@@ -91,8 +111,8 @@ const getCoordinatesAPI = async (geonamesBaseUrl, textUser, geonamesUsername) =>
     const res = await fetch(geonamesBaseUrl + textUser + geonamesUsername)
     try {
         const data = await res.json();
-        console.log("Data received from the server: ")
-        console.log(data)
+        //console.log("Data received from the server: ")
+        //console.log(data)
         apiJsonResponse = data;
         return data;
     } catch (error) {
@@ -110,13 +130,13 @@ app.get("/validateCity", (req, res) => {
     res.send(latestEntryGeoNames)
 })
 
-// Calling geonames API to obtain the city's coodinations
-const getCityDetailsAPI = async (geonamesBaseUrl, textUser, geonamesUsername) => {
+// Calling weatherbit API to obtain the city's coodinations
+const getWeatherDetailsAPI = async (weatherbitCurrentBaseUrl, weatherbitCurrentLat, latValue, weatherbitCurrentLon, lngValue, weatherbitCurrentKey, WEATHERBIT_API_KEY) => {
 
-    const res = await fetch(geonamesBaseUrl + textUser + geonamesUsername)
+    const res = await fetch(weatherbitCurrentBaseUrl + weatherbitCurrentLat + latValue + weatherbitCurrentLon + lngValue + weatherbitCurrentKey + WEATHERBIT_API_KEY)
     try {
         const data = await res.json();
-        console.log("Data received from the server: ")
+        console.log("Data received from the WeatherBit server: ")
         console.log(data)
         apiJsonResponse = data;
         return data;

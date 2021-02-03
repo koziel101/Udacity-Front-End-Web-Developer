@@ -1,0 +1,47 @@
+{
+    "data": [
+        {
+            "rh": 80,
+            "pod": "d",
+            "lon": -74.01,
+            "pres": 989.3,
+            "timezone": "America\/New_York",
+            "ob_time": "2021-02-03 14:00",
+            "country_code": "US",
+            "clouds": 100,
+            "ts": 1612360800,
+            "solar_rad": 53.7,
+            "state_code": "NY",
+            "city_name": "New York City",
+            "wind_spd": 1.54,
+            "wind_cdir_full": "west-southwest",
+            "wind_cdir": "WSW",
+            "slp": 999.3,
+            "vis": 5,
+            "h_angle": -54,
+            "sunset": "22:16",
+            "dni": 658.12,
+            "dewpt": -3,
+            "snow": 0,
+            "uv": 1.01166,
+            "precip": 0,
+            "wind_dir": 240,
+            "sunrise": "12:02",
+            "ghi": 268.6,
+            "dhi": 75.01,
+            "aqi": 57,
+            "lat": 40.71,
+            "weather": {
+                "icon": "c02d",
+                "code": 802,
+                "description": "Scattered clouds"
+            },
+            "datetime": "2021-02-03:14",
+            "temp": 0,
+            "station": "KJRB",
+            "elev_angle": 17.78,
+            "app_temp": -1.8
+        }
+    ],
+    "count": 1
+}
