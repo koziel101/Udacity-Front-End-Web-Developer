@@ -5,6 +5,7 @@ let departureDate = {};
 let returnDate = {};
 let dayDifference = [];
 let hasTrip = false;
+let wbData = {};
 
 document.getElementById('btn-new-trip').addEventListener('click', buttonClicked);
 
@@ -39,7 +40,16 @@ function buttonClicked(e) {
                         .then(res => res.json())
                         .then(data => {
                             console.log("New data was received from weatherbit server.")
-                            updateUI(data);
+                            wbData = data;
+                        })
+                        // Requesting Pixabay server for images on the city
+                        .then(postData('http://localhost:3000/pixaPicture', { cityProvided: appData }))
+                        // Retrieving data provided by Pixabay API
+                        .then(() => fetch("http://localhost:3000/retrievePixaPicture"))
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log("New data was received from Pixabay server.")
+                            updateUI(wbData, data);
                         })
                 }
             })
@@ -67,11 +77,14 @@ const postData = async (url = '', data = {}) => {
     }
 }
 
-export function updateUI(data) {
+export function updateUI(wbData, pixabayData) {
     if (!hasTrip) {
         document.getElementById("no-trip-planned").remove();
         hasTrip = true;
     }
+
+    // Setting the image for the user:
+    document.getElementById('city-img').setAttribute('src', pixabayData.hits[0].largeImageURL);
 
     // Days away until the trip:
     let myTripTo = document.getElementById("my-trip-to");
@@ -91,7 +104,7 @@ export function updateUI(data) {
 
     // How is the weather:
     let howIsWeather = document.getElementById("hows-weather");
-    howIsWeather.innerText = "How's the weather: " + data.data[0].weather.description;
+    howIsWeather.innerText = "How's the weather: " + wbData.data[0].weather.description;
 }
 
 export { buttonClicked }
