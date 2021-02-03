@@ -1,4 +1,4 @@
-# Evaluate News with NLP
+# Final Project: Travel App
 
 This is the final project from Udacity's Front End Development course. The Project Rubric can be found [HERE](https://review.udacity.com/#!/rubrics/2669/view).
 
