@@ -8,19 +8,18 @@ const geonamesUsername = "&maxRows=1&username=hiagokoziel"
 // Example of working URL: http://api.geonames.org/searchJSON?q=hawaii&maxRows=1&username=hiagokoziel
 
 // Details for weatherbit API request
+// Shared details
+const WbLat = "lat=";
+const WbLon = "&lon=";
+const WbKey = "&key=";
+
 // Current Weather API
-const weatherbitCurrentBaseUrl = "https://api.weatherbit.io/v2.0/current?&";
-const weatherbitCurrentLat = "lat=";
-const weatherbitCurrentLon = "&lon=";
-const weatherbitCurrentKey = "&key=";
+const WbCurrentBaseUrl = "https://api.weatherbit.io/v2.0/current?&";
 // Example of working URL: 
 // https://api.weatherbit.io/v2.0/current?&lat=20.78785&lon=-156.38612&key=9c1232e0219649419a091ae456846ef9
 
 // 16-day forecast weatherbit API
-const weatherbitForecastBaseUrl = "https://api.weatherbit.io/v2.0/forecast/daily?&";
-const weatherbitForecastLat = "lat=";
-const weatherbitForecastLon = "&lon=";
-const weatherbitForecastKey = "&key=";
+const WbForecastBaseUrl = "https://api.weatherbit.io/v2.0/forecast/daily?&";
 // Example of working URL: 
 // https://api.weatherbit.io/v2.0/forecast/daily?&lat=20.78785&lon=-156.38612&key=9c1232e0219649419a091ae456846ef9
 
@@ -62,7 +61,7 @@ app.post('/addCity', (req, res) => {
     // Getting the city's coordinates
     getCoordinatesAPI(geonamesBaseUrl, newEntry.cityProvided, geonamesUsername)
         .then(function (data) {
-            latestEntryGeoNames = data          //Updated part
+            latestEntryGeoNames = data
             res.send(latestEntryGeoNames)
             res.end();
         })
@@ -84,7 +83,7 @@ app.post('/addWeather', (req, res) => {
             lat: req.body.lat
         }
         // Getting the city's current weather
-        getForecastWeatherDetailsAPI(weatherbitForecastBaseUrl, weatherbitForecastLat, newEntry.lat, weatherbitForecastLon, newEntry.lng, weatherbitForecastKey, WEATHERBIT_API_KEY)
+        getForecastWeatherDetailsAPI(WbForecastBaseUrl, WbLat, newEntry.lat, WbLon, newEntry.lng, WbKey, WEATHERBIT_API_KEY)
             .then(function (data) {
                 latestEntryWeatherBit = data
                 res.send(latestEntryWeatherBit)
@@ -96,7 +95,7 @@ app.post('/addWeather', (req, res) => {
             lat: req.body.lat
         }
         // Getting the city's current weather
-        getCurrentWeatherDetailsAPI(weatherbitCurrentBaseUrl, weatherbitCurrentLat, newEntry.lat, weatherbitCurrentLon, newEntry.lng, weatherbitCurrentKey, WEATHERBIT_API_KEY)
+        getCurrentWeatherDetailsAPI(WbCurrentBaseUrl, WbLat, newEntry.lat, WbLon, newEntry.lng, WbKey, WEATHERBIT_API_KEY)
             .then(function (data) {
                 latestEntryWeatherBit = data
                 res.send(latestEntryWeatherBit)
@@ -141,9 +140,9 @@ const getCoordinatesAPI = async (geonamesBaseUrl, textUser, geonamesUsername) =>
 
 
 // Calling weatherbit API to obtain the city's coodinations - Current
-const getCurrentWeatherDetailsAPI = async (weatherbitCurrentBaseUrl, weatherbitCurrentLat, latValue, weatherbitCurrentLon, lngValue, weatherbitCurrentKey, WEATHERBIT_API_KEY) => {
+const getCurrentWeatherDetailsAPI = async (WbCurrentBaseUrl, WbLat, latValue, WbLon, lngValue, WbKey, WEATHERBIT_API_KEY) => {
 
-    const res = await fetch(weatherbitCurrentBaseUrl + weatherbitCurrentLat + latValue + weatherbitCurrentLon + lngValue + weatherbitCurrentKey + WEATHERBIT_API_KEY)
+    const res = await fetch(WbCurrentBaseUrl + WbLat + latValue + WbLon + lngValue + WbKey + WEATHERBIT_API_KEY)
     try {
         const data = await res.json();
         console.log("Data received from the WeatherBit server - CURRENT: ")
@@ -156,11 +155,10 @@ const getCurrentWeatherDetailsAPI = async (weatherbitCurrentBaseUrl, weatherbitC
     }
 }
 
-
 // Calling weatherbit API to obtain the city's coodinations - Forecast
-const getForecastWeatherDetailsAPI = async (weatherbitForecastBaseUrl, weatherbitForecastLat, latValue, weatherbitForecastLon, lngValue, weatherbitForecastKey, WEATHERBIT_API_KEY) => {
+const getForecastWeatherDetailsAPI = async (WbForecastBaseUrl, WbLat, latValue, WbLon, lngValue, WbKey, WEATHERBIT_API_KEY) => {
 
-    const res = await fetch(weatherbitForecastBaseUrl + weatherbitForecastLat + latValue + weatherbitForecastLon + lngValue + weatherbitForecastKey + WEATHERBIT_API_KEY)
+    const res = await fetch(WbForecastBaseUrl + WbLat + latValue + WbLon + lngValue + WbKey + WEATHERBIT_API_KEY)
     try {
         const data = await res.json();
         console.log("Data received from the WeatherBit server - FORECAST: ")
