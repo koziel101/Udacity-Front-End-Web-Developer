@@ -83,15 +83,24 @@ export function updateUI(wbData, pixabayData) {
         hasTrip = true;
     }
 
+    var fragment = document.createDocumentFragment();
+    var container = document.createElement("div");
+    container.classList.add("trip-added");
+
     // Setting the image for the user:
-    document.getElementById('city-img').setAttribute('src', pixabayData.hits[0].largeImageURL);
+    let image = document.createElement('img');
+    image.classList.add("city-img");
+    image.setAttribute('src', pixabayData.hits[0].largeImageURL);
+    container.appendChild(image);
 
     // Days away until the trip:
-    let myTripTo = document.getElementById("my-trip-to");
+    let myTripTo = document.createElement("h5");
+    myTripTo.classList.add("my-trip-to");
     myTripTo.innerText = "Details about my trip to " + appData;
+    container.appendChild(myTripTo);
 
     // Days away until the trip:
-    let daysAway = document.getElementById("days-away");
+    let daysAway = document.createElement("h6");
     if (dayDifference[dayDifference.length - 1] === 0) {
         daysAway.innerText = "The trip is today!";
     } else if (dayDifference[dayDifference.length - 1] === 1) {
@@ -101,10 +110,18 @@ export function updateUI(wbData, pixabayData) {
     } else {
         daysAway.innerText = dayDifference[dayDifference.length - 1] + " days until the trip!";
     }
+    daysAway.classList.add("days-away")
+    container.appendChild(daysAway);
 
     // How is the weather:
-    let howIsWeather = document.getElementById("hows-weather");
+    let howIsWeather = document.createElement("h6");
     howIsWeather.innerText = "How's the weather: " + wbData.data[0].weather.description;
+    howIsWeather.classList.add("hows-weather")
+    container.appendChild(howIsWeather);
+
+    // Adding the fragment in the UI
+    fragment.appendChild(container);
+    document.getElementById("trip-content").appendChild(fragment);
 }
 
 export { buttonClicked }

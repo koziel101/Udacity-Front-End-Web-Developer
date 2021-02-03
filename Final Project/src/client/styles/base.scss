@@ -52,27 +52,37 @@ body {
 }
 
 #new-form {
-    padding-top: 50px;
+    padding: 20px;
 }
 
-#my-new-trip {
-    padding-top: 50px;
+#trip-content {
+    padding: 15px;
+    text-align: center;
+    justify-content: center;
 }
 
-#city-img {
+.trip-added {
+    margin: 20px;
+    padding: 20px;
+    width: 500px;
+    background-color: rgb(221, 234, 253);
+    border: 3px solid green;
+}
+
+.city-img {
     grid-area: img;
     width: 400px;
     height: auto;
 }
 
-#my-trip-to {
+.my-trip-to {
     grid-area: myt;
 }
 
-#days-away {
+.days-away {
     grid-area: daw;
 }
 
-#hows-weather {
+.hows-weather {
     grid-area: wth;
 }
