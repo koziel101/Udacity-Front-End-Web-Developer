@@ -119,9 +119,22 @@ export function updateUI(wbData, pixabayData) {
     howIsWeather.classList.add("hows-weather")
     container.appendChild(howIsWeather);
 
+    //Adding a button to remove trip
+    let deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("btn");
+    deleteBtn.classList.add("btn-danger");
+    deleteBtn.setAttribute("content", "Test BTN")
+    deleteBtn.textContent = "Delete trip"
+    deleteBtn.addEventListener('click', deleteMe);
+    container.appendChild(deleteBtn)
+
     // Adding the fragment in the UI
     fragment.appendChild(container);
     document.getElementById("trip-content").appendChild(fragment);
 }
 
-export { buttonClicked }
+function deleteMe(e) {
+    e.currentTarget.parentNode.remove();
+}
+
+export { buttonClicked, deleteMe }
