@@ -1,15 +1,10 @@
 /* Layout for small screens */
+
 .main__container {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
-    grid-template-areas:
-        "nb"
-        "img"
-        "myt"
-        "daw"
-        "wth"
-        "ft";
+    grid-template-areas: "nb" "img" "myt" "daw" "wth" "ft";
 }
 
 body {
@@ -65,13 +60,13 @@ body {
     margin: 20px;
     padding: 20px;
     width: 500px;
-    background-color: rgb(221, 234, 253);
-    border: 3px solid green;
+    background-color: rgb(240, 246, 255);
+    border: 3px solid rgb(54, 54, 54);
 }
 
 .city-img {
     grid-area: img;
-    width: 400px;
+    width: 300px;
     height: auto;
 }
 
@@ -85,4 +80,16 @@ body {
 
 .hows-weather {
     grid-area: wth;
+}
+
+
+/* Settings for screens higher than 700px */
+
+@media (min-width: 700px) {
+    .main__container {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-template-areas: "nb nb nb nb nb" "img img myt myt" "img img daw daw" "img img wth wth" "ft ft ft ft";
+    }
 }

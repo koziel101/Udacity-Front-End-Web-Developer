@@ -1,9 +1,12 @@
 import { validateUserEntry } from "./checkTextUser.js";
 import { calculateDateDifference } from "./dayDifference"
+import { calculateTripLenght } from "./dayDifference"
+
 let appData = {};
 let departureDate = {};
 let returnDate = {};
 let dayDifference = [];
+let tripLength = [];
 let hasTrip = false;
 let wbData = {};
 
@@ -13,8 +16,10 @@ function buttonClicked(e) {
     appData = document.getElementById('city').value;
     departureDate = document.getElementById('departure-date').value;
     returnDate = document.getElementById('return-date').value;
+
     //dayDifference = calculateDateDifference(departureDate);
     dayDifference.push(calculateDateDifference(departureDate));
+    tripLength.push(calculateTripLenght(departureDate, returnDate));
 
     if (validateUserEntry(appData)) {
         // Sending data to server, so geonames API will get lat and lng
@@ -28,13 +33,17 @@ function buttonClicked(e) {
                     window.alert("City provided is not valid!");
                 } else if (!validateUserEntry(departureDate)) {
                     window.alert("Please select a departure date!");
+                } else if (!validateUserEntry(returnDate)) {
+                    window.alert("Please select a return date!");
+                } else if (tripLength[tripLength.length - 1] < 0) {
+                    window.alert("The return date cannot be before the departure date!");
                 } else {
                     // Data provided by user is valid. Sending lat, lng and dayDifference to server. Server will call Weatherbit API 
                     postData('http://localhost:3000/addWeather', {
-                        lat: data.geonames[0].lat,
-                        lng: data.geonames[0].lng,
-                        dayDifference: dayDifference[dayDifference.length - 1]
-                    })
+                            lat: data.geonames[0].lat,
+                            lng: data.geonames[0].lng,
+                            dayDifference: dayDifference[dayDifference.length - 1]
+                        })
                         // Retrieving data provided by Weatherbit API
                         .then(() => fetch("http://localhost:3000/checkWeather"))
                         .then(res => res.json())
@@ -58,7 +67,7 @@ function buttonClicked(e) {
     }
 }
 
-const postData = async (url = '', data = {}) => {
+const postData = async(url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -78,6 +87,16 @@ const postData = async (url = '', data = {}) => {
 }
 
 export function updateUI(wbData, pixabayData) {
+
+    // Disabling the button while the trip is being added.
+    document.getElementById("btn-new-trip").disabled = true;
+    var disableFragment = document.createDocumentFragment();
+    var creatingTrip = document.createElement("p");
+    creatingTrip.innerText = "Please wait while we generate your trip."
+    creatingTrip.id = "calculating-trip";
+    disableFragment.appendChild(creatingTrip);
+    document.getElementById("trip-content").appendChild(disableFragment);
+
     if (!hasTrip) {
         document.getElementById("no-trip-planned").remove();
         hasTrip = true;
@@ -93,7 +112,7 @@ export function updateUI(wbData, pixabayData) {
     image.setAttribute('src', pixabayData.hits[0].largeImageURL);
     container.appendChild(image);
 
-    // Days away until the trip:
+    // Details about my trip:
     let myTripTo = document.createElement("h5");
     myTripTo.classList.add("my-trip-to");
     myTripTo.innerText = "Details about my trip to " + appData;
@@ -113,6 +132,18 @@ export function updateUI(wbData, pixabayData) {
     daysAway.classList.add("days-away")
     container.appendChild(daysAway);
 
+    // How long is the trip:
+    let tripDuration = document.createElement("h6");
+    tripDuration.classList.add("trip-duration");
+    if (tripLength[tripLength.length - 1] === 0) {
+        tripDuration.innerText = "The departure and return date are the same.";
+    } else if (tripLength[tripLength.length - 1] === 1) {
+        tripDuration.innerText = "The trip will be " + tripLength[tripLength.length - 1] + " day long";
+    } else {
+        tripDuration.innerText = "The trip will be " + tripLength[tripLength.length - 1] + " days long";
+    }
+    container.appendChild(tripDuration);
+
     // How is the weather:
     let howIsWeather = document.createElement("h6");
     howIsWeather.innerText = "How's the weather: " + wbData.data[0].weather.description;
@@ -131,10 +162,27 @@ export function updateUI(wbData, pixabayData) {
     // Adding the fragment in the UI
     fragment.appendChild(container);
     document.getElementById("trip-content").appendChild(fragment);
+
+    // Enabling the button.
+    document.getElementById("btn-new-trip").disabled = false;
+    creatingTrip.remove();
 }
 
 function deleteMe(e) {
     e.currentTarget.parentNode.remove();
+
+    var element = document.getElementsByClassName("trip-added")[0]
+    if (!document.body.contains(element)) {
+        // There are no more trips in the page. Displaying the no trips message.
+        hasTrip = false;
+        var fragment = document.createDocumentFragment();
+        var noTrip = document.createElement("p");
+        noTrip.id = "no-trip-planned";
+        noTrip.innerText = "You currently don't have any trip planned."
+
+        fragment.appendChild(noTrip);
+        document.getElementById("trip-content").appendChild(fragment);
+    }
 }
 
 export { buttonClicked, deleteMe }
