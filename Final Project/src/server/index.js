@@ -1,3 +1,5 @@
+import app from './app';
+
 const dotenv = require('dotenv');
 dotenv.config();
 const WEATHERBIT_API_KEY = process.env.WEATHERBIT_API_KEY;
@@ -31,7 +33,7 @@ const pixabayImageType = "&image_type=photo";
 
 var path = require('path')
 const express = require('express')
-const app = express()
+
 const bodyParser = require('body-parser')
 const data = [];
 let latestEntryGeoNames = {};
@@ -44,9 +46,11 @@ const fetch = require("node-fetch");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+module.exports = app
+
 // Cors for cross origin allowance
 const cors = require('cors');
-app.use(cors());
+
 app.use(express.static('dist'))
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
@@ -211,3 +215,13 @@ const getPixaPictureAPI = async (pixabayBaseUrl, PIXABAY_API_KEY, pixabaySearchT
         // appropriately handle the error
     }
 }
+
+
+// Returning geonomes API data to the client side
+app.post("/test", (req, res) => {
+    return { latestEntryGeoNames };
+})
+
+app.get("/test", (req, res) => {
+    res.send('200')
+})
