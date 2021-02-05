@@ -1,6 +1,11 @@
 # Final Project: Travel App
 
-This is the final project from Udacity's Front End Development course. The Project Rubric can be found [HERE](https://review.udacity.com/#!/rubrics/2669/view).
+This is the final project from Udacity's Front End Development course. The Project Rubric can be found [HERE](https://review.udacity.com/#!/rubrics/2669/view). The project consists of the user providing a city and a departure date for a trip. The system them returns to the user how is the current weather (if the trip is whithin one week), or the trip's forecast if the departure day is further than one week. 
+
+
+As for additional features, this system also contains an end date and displays the trip's length to the user. 
+
+Another additional feature is that the user is able to delete an existing trip.
 
 
 ## Getting started
